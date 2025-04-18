@@ -1,0 +1,42 @@
+version: '3'
+services:
+  api-gateway:
+    build: './api-gateway'
+    depends_on:
+      - customer
+      - inventory
+      - menu
+      - order
+      - payment
+    ports:
+      - 3000:3000
+  
+  customer:
+    build: './customer-services'
+    ports:
+      - 3005:3005
+
+  inventory:
+    build: './inventory-services'
+    ports:
+      - 3004:3004
+
+  menu:
+    build: './menu-services'
+    ports:
+      - 3001:3001
+
+  order:
+    build: './order-services'
+    ports:
+      - 3002:3002
+
+  payment:
+    build: './payment-services'
+    ports:
+      - 3003:3003
+
+  db:
+    image: mongo
+    ports:
+      - 27017:27017
